@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .box {
+            text-align: center;
+            margin: auto;
+            padding-top: 20px;
+        }
+
+        .input {
+            border: 2px solid #000000;
+            width: 450px;
+            font-size: 20px;
+            height: 35px;
+            margin-top: 8px;
+        }
+
+        .button {
+            font-size: 20px;
+            height: 40px;
+            width: 75px;
+            background-color: #070bf9;
+            border: none;
+            cursor: pointer;
+            color: white; /* 修改文字颜色 */       
+            border-radius: 5px; /* 添加圆角边框 */
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+        }
+
+        .checkbox {
+            transform: scale(1.5); /* 将复选框的大小调整为原来的1.5倍 */
+        }
+        .checkbox-group {
+            margin-top: 15px;
+        }
+
+        .checkbox-label {
+            margin-right: 10px;
+            font-size:20px;
+        }
+
+        .div_result {
+            width: 500px;
+            float: left;
+        }
+
+        .result_box {
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 设置五列等宽 */
+            grid-gap: 20px; /* 设置格子之间的间距 */
+        }
+
+        .result {
+            text-align: left;
+            font-size: 20px;
+            font-weight: 400;
+            margin-top: 25px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .engine-wrapper {
+            text-align: center;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .engine-image {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+        }
+
+        .engine-name {
+            margin-top: 5px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="res/标题.png" alt="易搜索" height=46 width=143 ><br>
+        <input type="text" id="search-input" class="input" maxlength="100" value="" >
+        <button id="search-btn" class="button">搜索</button>
+        <div class="checkbox-group">
+            <input type="checkbox" id="baidu-checkbox" class="checkbox" checked>
+            <label for="baidu-checkbox" class="checkbox-label">百度</label>
+
+            <input type="checkbox" id="google-checkbox" class="checkbox" checked>
+            <label for="google-checkbox" class="checkbox-label">谷歌</label>
+
+            <input type="checkbox" id="bing-checkbox" class="checkbox" checked>
+            <label for="bing-checkbox" class="checkbox-label">必应</label>
+
+            <input type="checkbox" id="zhihu-checkbox" class="checkbox" checked>
+            <label for="zhihu-checkbox" class="checkbox-label">知乎</label>
+
+            <input type="checkbox" id="bilibili-checkbox" class="checkbox" checked>
+            <label for="bilibili-checkbox" class="checkbox-label">B站</label>
+
+            <input type="checkbox" id="csdn-checkbox" class="checkbox" checked>
+            <label for="csdn-checkbox" class="checkbox-label">CSDN</label>
+
+            <input type="checkbox" id="tieba-checkbox" class="checkbox" checked>
+            <label for="tieba-checkbox" class="checkbox-label">百度贴吧</label>
+
+            <input type="checkbox" id="github-checkbox" class="checkbox" checked>
+            <label for="github-checkbox" class="checkbox-label">github</label>
+
+            <input type="checkbox" id="Googlescholar-checkbox" class="checkbox" checked>
+            <label for="Googlescholar-checkbox" class="checkbox-label">谷歌学术</label>
+
+            <input type="checkbox" id="douyin-checkbox" class="checkbox" checked>
+            <label for="douyin-checkbox" class="checkbox-label">抖音</label>
+
+            <input type="checkbox" id="xiaohongshu-checkbox" class="checkbox" checked>
+            <label for="xiaohongshu-checkbox" class="checkbox-label">小红书</label>
+
+            <input type="checkbox" id="youtube-checkbox" class="checkbox" checked>
+            <label for="youtube-checkbox" class="checkbox-label">油管</label>
+            
+        </div>
+    </div>
+    <br>
+
+    <div id="search-results" class="result_box"></div>
+
+    <script>
+        const searchBtn = document.getElementById("search-btn");
+        const searchInput = document.getElementById("search-input");
+        const searchResults = document.getElementById("search-results");
+    
+        searchInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                searchBtn.click();
+            }
+        });
+    
+        searchBtn.addEventListener("click", function() {
+            const keyword = searchInput.value;
+            searchResults.innerHTML = "";
+    
+            const searchEngines = [
+                { name: "百度", image: "res/百度.ico", link: "https://www.baidu.com/s?wd=" },
+                { name: "Google", image: "res/谷歌搜索.ico", link: "https://www.google.com/search?q=" },
+                { name: "必应", image: "res/bing.ico", link: "https://cn.bing.com/search?q=" },
+                { name: "知乎", image: "res/知乎.ico", link: "https://www.zhihu.com/search?q=" },
+                { name: "B站", image: "res/B站.ico", link: "https://search.bilibili.com/all?keyword=" },
+                { name: "CSDN", image: "res/CSDN.ico", link: "https://so.csdn.net/so/search?t=blog&q=" },
+                { name: "百度贴吧", image: "res/百度贴吧.ico", link: "https://tieba.baidu.com/f/search/res?qw=" },
+                { name: "Github", image: "res/Github.ico", link: "https://github.com/search?type=repositories&q=" },
+                { name: "谷歌学术", image: "res/Google 学术搜索.ico", link: " https://scholar.google.com/scholar?q="},
+                { name: "抖音", image: "res/抖音.ico", link: " https://www.douyin.com/search/"},
+                { name: "小红书", image: "res/小红书.ico", link: "https://www.xiaohongshu.com/search_result?source=web_explore_feed&keyword="},
+                { name: "油管", image: "res/YouTube.ico", link: "https://www.youtube.com/results?search_query="},
+                
+                
+               
+            ];
+    
+            searchEngines.forEach(function(engine) {
+                const link = engine.link + encodeURIComponent(keyword);
+                const engineDiv = createEngineDiv(engine.name, engine.image, link);
+                searchResults.appendChild(engineDiv);
+            });
+        });
+    
+        // 创建搜索引擎结果的DOM元素
+        function createEngineDiv(engineName, engineImageSrc, link) {
+            const div = document.createElement("div");
+            div.classList.add("engine-wrapper");
+            div.addEventListener("click", function() {
+                window.open(link, "_blank");
+            });
+    
+            const image = document.createElement("img");
+            image.classList.add("engine-image");
+            image.src = engineImageSrc;
+            div.appendChild(image);
+    
+            const name = document.createElement("div");
+            name.classList.add("engine-name");
+            name.textContent = engineName;
+            div.appendChild(name);
+    
+            return div;
+        }
+    </script>
+    
+</body>
+</html>
