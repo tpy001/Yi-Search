@@ -143,8 +143,8 @@
                     </div>
                 </div>
 
-                <div v-if="knowledge.selected.length > 0"  class="engine-container">
-                    <div  v-for="item in knowledge.selected" :key="item">
+                <div v-if="AISearch.selected.length > 0"  class="engine-container">
+                    <div v-for="item in AISearch.selected" :key="item">
                         <div class="single_item">
                             <a :href="find_link(item)" target="_blank" style="color: #4c1aca;">
                                 <img  :src="find_picture(item)" class="engine-image">
@@ -177,7 +177,16 @@
                     </div>
                 </div>
               
-                
+                <div v-if="knowledge.selected.length > 0"  class="engine-container">
+                    <div  v-for="item in knowledge.selected" :key="item">
+                        <div class="single_item">
+                            <a :href="find_link(item)" target="_blank" style="color: #4c1aca;">
+                                <img  :src="find_picture(item)" class="engine-image">
+                                <div class ="engine-name"> {{ item }}</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
            
@@ -200,7 +209,7 @@
                     label:"论坛",choose:['知乎','CSDN','Github','百度贴吧'],selected:['知乎','CSDN','Github','百度贴吧']
                 },
                 scholar:{
-                    label:"学术",choose:['谷歌学术','SciHub','IEEE','ACM'],selected:['谷歌学术','SciHub','IEEE','ACM']
+                    label:"学术",choose:['谷歌学术','中国知网','SciHub','IEEE'],selected:['谷歌学术','中国知网','SciHub','IEEE']
                 },
                 video:{
                     label:"视频",choose:['B站','抖音','油管','小红书'],selected:['B站','抖音','油管','小红书']
@@ -208,9 +217,12 @@
                 knowledge:{
                     label:"文库",choose:['百度文库','豆丁网','道客巴巴','原创力文档'],selected:['百度文库','豆丁网','道客巴巴','原创力文档']
                 },
+                AISearch:{
+                    label:"AI搜索",choose:['GPT3.5','Brave','Perplex'],selected:['GPT3.5','Brave','Perplex']
+                },
 
                 Engines: [
-                //1.搜索引擎
+                    //1.搜索引擎
                     { name: "百度", image: "res/百度.ico", link: "https://www.baidu.com/s?wd=" },
                     { name: "必应", image: "res/bing.ico", link: "https://cn.bing.com/search?q=" },
                     { name: "Google", image: "res/谷歌搜索.ico", link: "https://www.google.com/search?q=" },
@@ -226,9 +238,10 @@
 
                     //3.学术
                     { name: "谷歌学术", image: "res/Google 学术搜索.ico", link: "https://scholar.google.com/scholar?q="},
+                    { name: "中国知网", image: "res/知网.ico", link: "https://kns.cnki.net/kns8s/defaultresult/index?kw="},
                     { name: "SciHub", image: "res/Sci-hub.png", link: "https://sci-hub.se/"},  
                     { name: "IEEE", image: "res/IEEE.ico", link: "https://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText="},
-                    { name: "ACM", image: "res/ACM.png", link: "https://dl.acm.org/action/doSearch?AllField="},          
+                   
 
                     //4.视频
                     { name: "B站", image: "res/B站.ico", link: "https://search.bilibili.com/video?keyword=" },
@@ -240,6 +253,12 @@
                     { name: "百度文库", image: "res/百度文库.png", link: "https://wenku.baidu.com/search?word=" },
                     { name: "豆丁网", image: "res/豆丁网.ico", link: "https://www.docin.com/search.do?nkey="},
                     { name: "道客巴巴", image: "res/道客巴巴.ico", link: "https://www.doc88.com/tag/"},
+                    { name: "原创力文档", image: "res/原创力文档.ico", link: "https://max.book118.com/search.html?q="},
+
+                    //6.AI搜索引擎
+                    { name: "GPT3.5", image: "res/chatGPT.ico", link: "https://chat.openai.com/?q=" },
+                    { name: "Brave", image: "res/brave.png", link: "https://search.brave.com/search?q="},
+                    { name: "Perplex", image: "res/perplexity.ico", link: "https://www.perplexity.ai/search/"},
                     { name: "原创力文档", image: "res/原创力文档.ico", link: "https://max.book118.com/search.html?q="},
                 ]
             },
