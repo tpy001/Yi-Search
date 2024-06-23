@@ -187,6 +187,17 @@
                         </div>
                     </div>
                 </div>
+
+                <div v-if="DriveSearch.selected.length > 0"  class="engine-container">
+                    <div  v-for="item in DriveSearch.selected" :key="item">
+                        <div class="single_item">
+                            <a :href="find_link(item)" target="_blank" style="color: #4c1aca;">
+                                <img  :src="find_picture(item)" class="engine-image">
+                                <div class ="engine-name"> {{ item }}</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
            
@@ -219,6 +230,9 @@
                 },
                 AISearch:{
                     label:"AI搜索",choose:['GPT3.5','Brave','Perplex'],selected:['GPT3.5','Brave','Perplex']
+                },
+                DriveSearch:{
+                    label:"网盘搜索",choose:['小云搜索','云盘4K','夸克盘搜','热搜盘'],selected:['小云搜索','云盘4K','夸克盘搜','热搜盘']
                 },
 
                 Engines: [
@@ -258,8 +272,18 @@
                     //6.AI搜索引擎
                     { name: "GPT3.5", image: "res/chatGPT.ico", link: "https://chat.openai.com/?q=" },
                     { name: "Brave", image: "res/brave.png", link: "https://search.brave.com/search?q="},
-                    { name: "Perplex", image: "res/perplexity.ico", link: "https://www.perplexity.ai/search/"},
+                    { name: "Perplex", image: "res/perplexity.ico", link: "https://www.perplexity.ai/search?q="},
                     { name: "原创力文档", image: "res/原创力文档.ico", link: "https://max.book118.com/search.html?q="},
+
+                    //7.网盘搜索
+                    { name: "小云搜索", image: "res/小云搜索.ico", link: "https://www.yunso.net/index/user/s?wd="},
+                    { name: "云盘4K", image: "res/云盘4K.ico", link: "https://www.codelicence.cn/"},
+                    { name: "夸克盘搜", image: "res/夸克盘搜.ico", link: "https://qkpanso.com/search?q="},
+                    { name: "热搜盘", image: "res/热搜盘.ico", link: "http://www.repanso.com/q?type=0&wd="},
+
+
+
+
                 ]
             },
             created() {
