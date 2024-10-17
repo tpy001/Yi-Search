@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8"> 
     <style>
         .box {
             text-align: center;
@@ -198,6 +199,17 @@
                         </div>
                     </div>
                 </div>
+
+                <div v-if="OtherApp.selected.length > 0"  class="engine-container">
+                    <div  v-for="item in OtherApp.selected" :key="item">
+                        <div class="single_item">
+                            <a :href="find_link(item)" target="_blank" style="color: #4c1aca;">
+                                <img  :src="find_picture(item)" class="engine-image">
+                                <div class ="engine-name"> {{ item }}</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
            
@@ -220,19 +232,23 @@
                     label:"论坛",choose:['知乎','CSDN','Github','百度贴吧'],selected:['知乎','CSDN','Github','百度贴吧']
                 },
                 scholar:{
-                    label:"学术",choose:['谷歌学术','中国知网','SciHub','IEEE'],selected:['谷歌学术','中国知网','SciHub','IEEE']
+                    label:"学术",choose:['谷歌学术','arxiv','语义学术','中国知网'],selected:['谷歌学术','arxiv','语义学术','中国知网']
                 },
                 video:{
-                    label:"视频",choose:['B站','抖音','油管','小红书'],selected:['B站','抖音','油管','小红书']
+                    label:"视频",choose:['b站','抖音','油管','小红书'],selected:['b站','抖音','油管','小红书']
                 },
                 knowledge:{
                     label:"文库",choose:['百度文库','豆丁网','道客巴巴','原创力文档'],selected:['百度文库','豆丁网','道客巴巴','原创力文档']
                 },
                 AISearch:{
-                    label:"AI搜索",choose:['GPT3.5','Brave','Perplex'],selected:['GPT3.5','Brave','Perplex']
+                    label:"AI搜索",choose:['GPT3.5','Brave','Perplex','Genspark'],selected:['GPT3.5','Brave','Perplex','Genspark']
                 },
                 DriveSearch:{
                     label:"网盘搜索",choose:['小云搜索','云盘4K','夸克盘搜','热搜盘'],selected:['小云搜索','云盘4K','夸克盘搜','热搜盘']
+                },
+
+                OtherApp:{
+                    label:"其余网页",choose:['邮件','网盘','GPT','梯子'],selected:['邮件','网盘','GPT','梯子']
                 },
 
                 Engines: [
@@ -255,10 +271,13 @@
                     { name: "中国知网", image: "res/知网.ico", link: "https://kns.cnki.net/kns8s/defaultresult/index?kw="},
                     { name: "SciHub", image: "res/Sci-hub.png", link: "https://sci-hub.se/"},  
                     { name: "IEEE", image: "res/IEEE.ico", link: "https://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText="},
+                    { name: "arxiv", image: "res/arxiv.png", link: "https://arxiv.org/search/?searchtype=title&abstracts=show&order=-announced_date_first&size=50&query="},
+                    { name: "语义学术", image: "res/语义学术.png", link: "https://www.semanticscholar.org/search?sort=relevance&q="},
                    
+                    
 
                     //4.视频
-                    { name: "B站", image: "res/B站.ico", link: "https://search.bilibili.com/video?keyword=" },
+                    { name: "b站", image: "res/b站.ico", link: "https://search.bilibili.com/video?keyword=" },
                     { name: "抖音", image: "res/抖音.ico", link: "https://www.douyin.com/search/"},
                     { name: "油管", image: "res/YouTube.ico", link: "https://www.youtube.com/results?search_query="},
                     { name: "小红书", image: "res/小红书.ico", link: "https://www.xiaohongshu.com/search_result?source=web_explore_feed&keyword="},
@@ -273,16 +292,19 @@
                     { name: "GPT3.5", image: "res/chatGPT.ico", link: "https://chat.openai.com/?q=" },
                     { name: "Brave", image: "res/brave.png", link: "https://search.brave.com/search?q="},
                     { name: "Perplex", image: "res/perplexity.ico", link: "https://www.perplexity.ai/search?q="},
-                    { name: "原创力文档", image: "res/原创力文档.ico", link: "https://max.book118.com/search.html?q="},
+                    { name: "Genspark", image: "res/Genspark.ico", link: "https://www.genspark.ai/search?query="},
 
                     //7.网盘搜索
                     { name: "小云搜索", image: "res/小云搜索.ico", link: "https://www.yunso.net/index/user/s?wd="},
-                    { name: "云盘4K", image: "res/云盘4K.ico", link: "https://www.codelicence.cn/"},
+                    { name: "云盘4K", image: "res/云盘4K.ico", link: "https://www.codelicence.cn?q="},
                     { name: "夸克盘搜", image: "res/夸克盘搜.ico", link: "https://qkpanso.com/search?q="},
                     { name: "热搜盘", image: "res/热搜盘.ico", link: "http://www.repanso.com/q?type=0&wd="},
 
-
-
+                    //8.其他应用
+                    { name: "邮件", image: "res/邮件.ico", link: "./Email/邮件.html?q="},
+                    { name: "网盘", image: "res/网盘.ico", link: "./Drive/网盘.html?q="},
+                    { name: "GPT", image: "res/ChatGPT_OpenAI.ico", link: "./ChatGpt/ChatGpt镜像.html?q="},
+                    { name: "梯子", image: "res/Clash.ico", link: "./VPN/VPN列表.html?q="},
 
                 ]
             },

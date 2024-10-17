@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .box {
+            text-align: center;
+            margin: auto;
+            padding-top: 20px;
+        }
+
+        .input {
+            border: 2px solid #000000;
+            width: 450px;
+            font-size: 20px;
+            height: 35px;
+            margin-top: 8px;
+        }
+
+        .button {
+            font-size: 20px;
+            height: 40px;
+            width: 75px;
+            background-color: #070bf9;
+            border: none;
+            cursor: pointer;
+            color: white; /* 修改文字颜色 */       
+            border-radius: 5px; /* 添加圆角边框 */
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+        }
+
+        .checkbox {
+            transform: scale(1.5); /* 将复选框的大小调整为原来的1.5倍 */
+        }
+        .checkbox-group {
+            margin-top:25px;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 设置五列等宽 */
+            grid-gap: 10px; /* 设置格子之间的间距 */
+        }
+
+        .result_box {
+            margin-left:50px;
+            margin-right:50px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .engine-image {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+        }
+
+        .engine-name {
+            margin-top: 5px;
+            font-size: 18px;
+        
+            text-align: center;
+        }
+        .engine-container{
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* 每列一份, 可以通过 repeat(n, 1fr) 来指定 n 列 */
+            grid-gap: 20px; /* 控制元素之间的间距 */
+            grid-row-gap: 30px;  /* 控制垂直方向的距离 */
+            /* border: 3px solid gray; */
+        }
+
+        .result_wrapper{
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);  /* 修改此初调整网页布局，默认是 4x1 的排列格式 */
+            grid-gap: 20px; /* 控制元素之间的间距 */
+            margin-top:15px;
+        }
+
+        .single_item{
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height:121px
+        }
+        
+    </style>
+</head>
+<body>
+    <div id = "app">
+        <div class="box">
+            <img src="res/标题.png" alt="易搜索" height=46 width=143 ><br>
+            <input type="text" id="search-input" class="input" maxlength="100" value="" v-model = "keyword">
+            <button id="search-btn" class="button">搜索</button>
+            <div class="checkbox-group">
+                <label v-for="engine in Search_Engines.choose" :key="engine" style = "font-size: 18px;">
+                    <input type="checkbox" v-model="Search_Engines.selected" :value="engine">
+                    {{ engine }} &nbsp&nbsp
+                </label>
+            </div>
+        
+        </div>
+   
+        <br>
+    
+
+        <div id="search-results" class="result_box">
+
+            <div class ="result_wrapper">
+                <div v-if="Search_Engines.selected.length > 0" class="engine-container">
+                    <div  v-for="item in Search_Engines.selected" :key="item" >
+                            <div class="single_item">
+                                <a :href="find_link(item)" target="_blank" style="color: #4c1aca;">
+                                    <img  :src="find_picture(item)" class="engine-image">
+                                    <div class ="engine-name"> {{ item }}</div>
+                                </a>
+                            </div>
+                    </div>
+                </div>
+                
+            </div>
+
+           
+            
+        </div>
+
+    </div>
+
+    <script src="vue.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                keyword: "", //搜索的关键字
+                Search_Engines: {
+                    label:"搜索引擎",choose:['雷霆','大哥云','悠兔','OKZTWO','自由之界'],selected:['雷霆','大哥云','悠兔','OKZTWO','自由之界']
+                },
+
+                Engines: [
+                //1.搜索引擎
+                    { name: "雷霆", image: "res/AIChatOSd.ico", link: "https://www.leiting.io/dashboard"},
+                    { name: "大哥云", image: "res/AIChatOSd.ico", link: "https://ab12y.com/#/dashboard"},
+                    { name: "悠兔", image: "res/AIChatOSd.ico", link: "https://youtu.shop/#/register?code=3CxiqyOc"},
+                    { name: "OKZTWO", image: "res/AIChatOSd.ico", link: "https://aff.okzz.net/"},
+                    { name: "自由之界", image: "res/AIChatOSd.ico", link: "https://free.moorzon.com/user/index"},
+
+                    
+
+
+                   
+                    
+
+
+                ]
+            },
+            created() {
+
+            },
+            methods:{
+                test(){ 
+                    alert(JSON.stringify(this.Search_Engines.selected));
+                },
+                find_link(name){
+                    const engine = this.Engines.find(engine => engine.name === name);
+                    if (engine) {
+                        return engine.link + this.keyword;
+                    } else {
+                        return "";
+                    }
+                },
+                find_picture(name){
+                    const engine = this.Engines.find(engine => engine.name === name);
+                    if (engine) {
+                        return engine.image
+                    } else {
+                        return "";
+                    }
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>
+
+
