@@ -178,8 +178,8 @@
                     </div>
                 </div>
               
-                <div v-if="knowledge.selected.length > 0"  class="engine-container">
-                    <div  v-for="item in knowledge.selected" :key="item">
+                <div v-if="Social_Media.selected.length > 0"  class="engine-container">
+                    <div  v-for="item in Social_Media.selected" :key="item">
                         <div class="single_item">
                             <a :href="find_link(item)" target="_blank" style="color: #4c1aca;">
                                 <img  :src="find_picture(item)" class="engine-image">
@@ -229,16 +229,19 @@
                     label:"搜索引擎",choose:['百度', '必应', 'Google','公众号'],selected:['百度', '必应', 'Google','公众号']
                 },
                 blog:{
-                    label:"论坛",choose:['知乎','CSDN','Github','百度贴吧'],selected:['知乎','CSDN','Github','百度贴吧']
+                    label:"论坛",choose:['知乎','CSDN','Github','小红书'],selected:['知乎','CSDN','Github','小红书']
                 },
                 scholar:{
                     label:"学术",choose:['谷歌学术','arxiv','语义学术','中国知网'],selected:['谷歌学术','arxiv','语义学术','中国知网']
                 },
                 video:{
-                    label:"视频",choose:['b站','抖音','油管','小红书'],selected:['b站','抖音','油管','小红书']
+                    label:"视频",choose:['b站','抖音','油管','百度贴吧'],selected:['b站','抖音','油管','百度贴吧']
                 },
                 knowledge:{
                     label:"文库",choose:['百度文库','豆丁网','道客巴巴','原创力文档'],selected:['百度文库','豆丁网','道客巴巴','原创力文档']
+                },
+                Social_Media:{
+                    label:"社交媒体",choose:['推特','Reddit','脸书','Instagra'],selected:['推特','Reddit','脸书','Instagra']
                 },
                 AISearch:{
                     label:"AI搜索",choose:['GPT3.5','Brave','Perplex','Genspark'],selected:['GPT3.5','Brave','Perplex','Genspark']
@@ -264,7 +267,7 @@
                     { name: "知乎", image: "res/知乎.ico", link: "https://www.zhihu.com/search?q=" },
                     { name: "CSDN", image: "res/CSDN.ico", link: "https://so.csdn.net/so/search?t=blog&q=" },
                     { name: "Github", image: "res/Github.ico", link: "https://github.com/search?type=repositories&q=" },
-                    { name: "百度贴吧", image: "res/百度贴吧.ico", link: "https://tieba.baidu.com/f/search/res?qw=" },
+                    { name: "小红书", image: "res/小红书.ico", link: "https://www.xiaohongshu.com/search_result?source=web_explore_feed&keyword="},
 
                     //3.学术
                     { name: "谷歌学术", image: "res/Google 学术搜索.ico", link: "https://scholar.google.com/scholar?q="},
@@ -280,7 +283,8 @@
                     { name: "b站", image: "res/b站.ico", link: "https://search.bilibili.com/video?keyword=" },
                     { name: "抖音", image: "res/抖音.ico", link: "https://www.douyin.com/search/"},
                     { name: "油管", image: "res/YouTube.ico", link: "https://www.youtube.com/results?search_query="},
-                    { name: "小红书", image: "res/小红书.ico", link: "https://www.xiaohongshu.com/search_result?source=web_explore_feed&keyword="},
+                    { name: "百度贴吧", image: "res/百度贴吧.ico", link: "https://tieba.baidu.com/f/search/res?qw=" },
+
 
                     //5.文库
                     { name: "百度文库", image: "res/百度文库.png", link: "https://wenku.baidu.com/search?word=" },
@@ -306,6 +310,14 @@
                     { name: "GPT", image: "res/ChatGPT_OpenAI.ico", link: "./ChatGpt/ChatGpt镜像.html?q="},
                     { name: "梯子", image: "res/Clash.ico", link: "./VPN/VPN列表.html?q="},
 
+                    //9. 国外的社交媒体
+                    { name: "推特", image: "res/X.ico", link: "https://x.com/search?src=typed_query&q="},
+                    { name: "脸书", image: "res/Facebook.ico", link: "https://www.facebook.com/search/top/?q="},
+                    { name: "Reddit", image: "res/Reddit.ico", link: "https://www.reddit.com/search/?q="},
+                    { name: "Instagra", image: "res/Instagram.ico", link: "https://www.instagram.com/?q="},
+
+
+                    
                 ]
             },
             created() {
